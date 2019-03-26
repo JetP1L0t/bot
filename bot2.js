@@ -3,10 +3,13 @@
 const TeleBot = require('telebot');
 const newSet = {
 // iwantsome
-//	token: '791540308:AAHVEHwF2yr0ARFEarBGCGVDlVco1stOg1c',
+	token: '791540308:AAHVEHwF2yr0ARFEarBGCGVDlVco1stOg1c',
+	polling: { interval: 1000, limit: 1, timeout: 5, retryTimeout: 5000},
+
 // jetp1l0t_bot
-	token: '866834920:AAHKusBh8qQaIHd7pTfK5tXb4KQwBV9hUa8',
-        polling: { interval: 1000, limit: 1, timeout: 5, retryTimeout: 5000, proxy: 'http://pu:pu@de.trolo.bid:14448' },
+//	token: '866834920:AAHKusBh8qQaIHd7pTfK5tXb4KQwBV9hUa8',
+// polling: { interval: 1000, limit: 1, timeout: 5, retryTimeout: 5000, proxy: 'http://pu:pu@de.trolo.bid:14448' },
+
 	// webhook:  { url: 'https://trolo.bid/zhelezka', host: 'localhost', port: 3000 },
 	usePlugins: ['ignoreMessagesBeforeStart','floodProtection']
 	};
@@ -17,7 +20,7 @@ function choosePic(what,chat_id,requester_name,requester_id) {
 //var when = new Date(Date.now());
 
 var dateFormat = require('dateformat');
-var now = new Date();
+var now = new Date();  
 
 var fs = require('fs');
 var files = fs.readdirSync(where+what);
