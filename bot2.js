@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 const TeleBot = require('telebot');
+var dateFormat = require('dateformat');
+var newSet = require('./config.js');
+/*
 const newSet = {
 // iwantsome
 	token: '791540308:AAHVEHwF2yr0ARFEarBGCGVDlVco1stOg1c',
@@ -13,39 +16,40 @@ const newSet = {
 	// webhook:  { url: 'https://trolo.bid/zhelezka', host: 'localhost', port: 3000 },
 	usePlugins: ['ignoreMessagesBeforeStart','floodProtection']
 	};
+*/
 const where = './pics/';
 bot = new TeleBot(newSet);
 
-function choosePic(what,chat_id,requester_name,requester_id) {
-//var when = new Date(Date.now());
+function choosePic(what, chat_id, requester_name, requester_id) {
+	//var when = new Date(Date.now());
+	var now = new Date();  
+	var fs = require('fs');
+	var files = fs.readdirSync(where+what);
+	var arr = [
+				// -1001314628360, // test4
+				123
+			];		
 
-var dateFormat = require('dateformat');
-var now = new Date();  
+	let chosenFile = where + what +'/'+ files[Math.floor(Math.random() * files.length)]
 
-var fs = require('fs');
-var files = fs.readdirSync(where+what);
-var arr = [
-			// -1001314628360, // test4
-			123
-		];		
-let chosenFile = where + what +'/'+ files[Math.floor(Math.random() * files.length)]
-
-if (arr.includes(chat_id)) {return '';}
-else	{
-			bot.getChat(chat_id).then(function(data) {
+	if (arr.includes(chat_id)) {
+		return '';
+	} else {
+		bot.getChat(chat_id).then(function(data) {
 			if (data.username != undefined) {chat_name = data.username} else {chat_name = data.title;}
-			console.log(dateFormat(now, "yyyy-mm-dd HH:MM:ss o") +' sent ' +chosenFile + 
+			console.log(dateFormat(now, "yyyy-mm-dd HH:MM:ss o") +' sent ' + chosenFile + 
 			'\n to \@' + chat_name + ' \['+ chat_id + '\] by request of ' + requester_name + ' \[' + requester_id +'\]');
-			});
+		});
+
 		return chosenFile;
-		};
+	};
 }
 
 bot.on(/(showmeid)/, (msg) => {
 return msg.reply.text(msg.chat.id, { asReply: true });
 });
 
-bot.on(/(ниа)/, (msg) => {
+bot.on(/(ниа)/i, (msg) => {
 return msg.reply.text('пидарасы!',{ asReply: true });
 });
 
