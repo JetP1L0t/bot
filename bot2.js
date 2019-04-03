@@ -3,7 +3,6 @@
 const TeleBot = require('telebot');
 var dateFormat = require('dateformat');
 var newSet = require('./config.js');
-var a = 1;
 
 const where = './pics/';
 bot = new TeleBot(newSet);
