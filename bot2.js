@@ -32,9 +32,32 @@ function choosePic(what, chat_id, requester_name, requester_id) {
 	};
 }
 
-bot.on(/(showmeid)/, (msg) => {
-return msg.reply.text(msg.chat.id, { asReply: true });
-});
+bot.on(/(update)/, (msg) => {
+	if ((msg.chat.id=29884911)&(msg.from.id=29884911)) {
+	const execSync = require('child_process').execSync;
+//	var cmd = execSync('git status',
+	var cmd = execSync('git pull',
+        (error, stdout, stderr) => {
+			state = 'STDOUT: ' + stdout +'\n STDERR:' + stderr + '\n ERR: '+ error;
+		   console.log(state);
+		   console.log('repo updated')
+		});
+	return msg.reply.text(cmd, { asReply: true });
+	} else { return '';}});
+
+bot.on(/(restart)/, (msg) => {
+	if ((msg.chat.id=29884911)&(msg.from.id=29884911)) {
+	const execSync = require('child_process').execSync;
+	//var cmd = execSync('forever restart slave.js --no-colors',
+	var cmd = execSync('forever restart bot2.js --no-colors',
+		(error, stdout, stderr) => {
+			state = 'STDOUT: ' + stdout +'\n STDERR:' + stderr + '\n ERR: '+ error;
+			console.log(state);
+			console.log('bot restarted')
+		});
+	return msg.reply.text(cmd, { asReply: true });
+} else { return '';}});
+
 
 bot.on(/(ниа)/i, (msg) => {
 return msg.reply.text('пидарасы!',{ asReply: true });
@@ -63,6 +86,7 @@ bot.on(/(дева)/i, (msg) => {
 return msg.reply.photo(choosePic('full',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
+/*
 bot.on(/(gif)/i, (msg) => {
 	return bot.sendDocument(
 			msg.chat.id,
@@ -70,6 +94,7 @@ bot.on(/(gif)/i, (msg) => {
 			{replyToMessage: msg.message_id}
 	)
 });
+*/
 
 bot.start();
 
