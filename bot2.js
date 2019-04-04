@@ -86,15 +86,13 @@ bot.on(/(дева)/i, (msg) => {
 return msg.reply.photo(choosePic('full',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
-/*
-bot.on(/(gif)/i, (msg) => {
+bot.on(/(рейдим\sтира|рэйдим\sтира)/i, (msg) => {
 	return bot.sendDocument(
 			msg.chat.id,
 			choosePic('gifs/poke',msg.chat.id,msg.from.username,msg.from.id),
 			{replyToMessage: msg.message_id}
 	)
 });
-*/
 
 bot.start();
 
