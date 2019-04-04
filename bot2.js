@@ -36,26 +36,26 @@ bot.on(/(update)/, (msg) => {
 	if ((msg.chat.id=29884911)&(msg.from.id=29884911)) {
 	const execSync = require('child_process').execSync;
 //	var cmd = execSync('git status',
-	var cmd = execSync('git pull',
+	var cmd1 = execSync('git pull',
         (error, stdout, stderr) => {
 			state = 'STDOUT: ' + stdout +'\n STDERR:' + stderr + '\n ERR: '+ error;
-		   console.log(state);
-		   console.log('repo updated')
+			console.log(state);
+			console.log('repo updated')
 		});
-	return msg.reply.text(cmd, { asReply: true });
+	return msg.reply.text(cmd1, { asReply: true });
 	} else { return '';}});
 
 bot.on(/(restart)/, (msg) => {
 	if ((msg.chat.id=29884911)&(msg.from.id=29884911)) {
 	const execSync = require('child_process').execSync;
 	//var cmd = execSync('forever restart slave.js --no-colors',
-	var cmd = execSync('forever restart bot2.js --no-colors',
+	var cmd2 = execSync('forever restart bot2.js --no-colors',
 		(error, stdout, stderr) => {
-			state = 'STDOUT: ' + stdout +'\n STDERR:' + stderr + '\n ERR: '+ error;
-			console.log(state);
+//			state = 'STDOUT: ' + stdout +'\n STDERR:' + stderr + '\n ERR: '+ error;
+//			console.log(state);
 			console.log('bot restarted')
 		});
-	return msg.reply.text(cmd, { asReply: true });
+	return msg.reply.text(cmd2, { asReply: true });
 } else { return '';}});
 
 
