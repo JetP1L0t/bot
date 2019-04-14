@@ -130,7 +130,15 @@ bot.on(/(коробки)/i, (msg) => {
 bot.on(/(рейдим\sтира|рэйдим\sтира|на\sтира)/i, (msg) => {
 	return bot.sendDocument(
 			msg.chat.id,
-			choosePic('single/tyr.gif',msg.chat.id,msg.from.username,msg.from.id),
+			choosePic('single/tyr.mp4',msg.chat.id,msg.from.username,msg.from.id),
+			{replyToMessage: msg.message_id}
+	)
+});
+
+bot.on(/(стродать)/i, (msg) => {
+	return bot.sendDocument(
+			msg.chat.id,
+			choosePic('single/strodat.mp4',msg.chat.id,msg.from.username,msg.from.id),
 			{replyToMessage: msg.message_id}
 	)
 });
@@ -140,4 +148,4 @@ bot.start();
 process.on('unhandledRejection', (reason, p) => {
 	console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
 	// application specific logging, throwing an error, or other logic here
-  });
+});
