@@ -9,14 +9,11 @@ bot = new TeleBot(newSet);
 
 
 function is_dir(path) {
+	var fs = require('fs');
     try {
 		console.log(fs.lstatSync(path+'/').isFile());
-		console.log('dir detected');
         return true;
     } catch (e) {
-		console.log(path);
-		console.log('file detected');
-        // lstatSync throws an error if path doesn't exist
         return false;
     }
 }
@@ -30,11 +27,12 @@ function choosePic(what, chat_id, requester_name, requester_id) {
 				// -1001314628360, // test4
 				123
 			];
-	if (is_dir(where+what)) {console.log('file!!');var chosenFile = where + what}
+	if (is_dir(where+what)) {
+		var files = fs.readdirSync(where+what);
+		var chosenFile = where + what +'/'+ files[Math.floor(Math.random() * files.length)]
+	}
 	else {
-	console.log('dir!!');
-	var files = fs.readdirSync(where+what);
-	var chosenFile = where + what +'/'+ files[Math.floor(Math.random() * files.length)]
+		var chosenFile = where + what;
 	} 
 
 	if (arr.includes(chat_id)) {
@@ -43,11 +41,12 @@ function choosePic(what, chat_id, requester_name, requester_id) {
 		bot.getChat(chat_id).then(function(data) {
 			if (data.username != undefined) {chat_name = data.username} else {chat_name = data.title;}
 			console.log(dateFormat(now, "yyyy-mm-dd HH:MM:ss o") +' sent ' + chosenFile + 
-			'\n to \@' + chat_name + ' \['+ chat_id + '\] by request of ' + requester_name + ' \[' + requester_id +'\]');
+			'\nto \@' + chat_name + ' \['+ chat_id + '\] by request of ' + requester_name + ' \[' + requester_id +'\]');
 		});
 		return chosenFile;
 	};
 }
+
 
 bot.on(/(update)/, (msg) => {
 	if (msg.chat.id=29884911) {
@@ -60,6 +59,7 @@ bot.on(/(update)/, (msg) => {
 		});
 	return msg.reply.text(cmd1, { asReply: true });
 	} else { return '';}});
+
 
 bot.on(/(restart)/, (msg) => {
 	if (msg.chat.id=29884911) {
@@ -79,6 +79,18 @@ return msg.reply.text('пидарасы!',{ asReply: true });
 });
 
 
+bot.on('newChatMembers', (msg) =>
+	{
+	if (msg.new_chat_member.username) {
+										msg.reply.text('@'+msg.new_chat_member.username+' привет!',{ asReply: true });
+									}
+	else {
+			msg.reply.text(msg.new_chat_member.first_name+' привет!',{ asReply: true });
+		}
+	}
+);
+
+
 bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
@@ -88,12 +100,11 @@ bot.on(/(арбайт|работать)/i, (msg) => {
 	return msg.reply.photo(choosePic('arbeit',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
 
-
-bot.on(/(попа|жопа|задница)/i, (msg) => {
+bot.on(/(попа\s|жопа|задница)/i, (msg) => {
 	return msg.reply.photo(choosePic('popki',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
 
-bot.on(/(сиси|сиськи)/i, (msg) => {
+bot.on(/(сиси|сиськи|тити)/i, (msg) => {
 	return msg.reply.photo(choosePic('siski',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
@@ -102,13 +113,13 @@ bot.on(/(дева)/i, (msg) => {
 });
 
 bot.on(/(коробки)/i, (msg) => {
-	return msg.reply.photo(choosePic('single/korobki',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
+	return msg.reply.photo(choosePic('single/korobki.jpg',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
 bot.on(/(рейдим\sтира|рэйдим\sтира|на\sтира)/i, (msg) => {
 	return bot.sendDocument(
 			msg.chat.id,
-			choosePic('gifs/poke/tyr.gif',msg.chat.id,msg.from.username,msg.from.id),
+			choosePic('single/tyr.gif',msg.chat.id,msg.from.username,msg.from.id),
 			{replyToMessage: msg.message_id}
 	)
 });
