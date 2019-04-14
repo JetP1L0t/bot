@@ -90,6 +90,17 @@ bot.on('newChatMembers', (msg) =>
 	}
 );
 
+bot.on('leftChatMember', (msg) =>
+{
+if (msg.left_chat_member.username) {
+									msg.reply.text('Прощай @'+msg.left_chat_member.username,{ asReply: true });
+								}
+else {
+		msg.reply.text('Прощай '+msg.left_chat_member.first_name,{ asReply: true });
+	}
+}
+);
+
 
 bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
