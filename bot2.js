@@ -7,17 +7,35 @@ var newSet = require('./config.js');
 const where = './pics/';
 bot = new TeleBot(newSet);
 
+
+function is_dir(path) {
+    try {
+		console.log(fs.lstatSync(path+'/').isFile());
+		console.log('dir detected');
+        return true;
+    } catch (e) {
+		console.log(path);
+		console.log('file detected');
+        // lstatSync throws an error if path doesn't exist
+        return false;
+    }
+}
+
+
 function choosePic(what, chat_id, requester_name, requester_id) {
 	//var when = new Date(Date.now());
 	var now = new Date();  
 	var fs = require('fs');
-	var files = fs.readdirSync(where+what);
 	var arr = [
 				// -1001314628360, // test4
 				123
 			];
-
-	let chosenFile = where + what +'/'+ files[Math.floor(Math.random() * files.length)]
+	if (is_dir(where+what)) {console.log('file!!');var chosenFile = where + what}
+	else {
+	console.log('dir!!');
+	var files = fs.readdirSync(where+what);
+	var chosenFile = where + what +'/'+ files[Math.floor(Math.random() * files.length)]
+	} 
 
 	if (arr.includes(chat_id)) {
 		return '';
@@ -83,10 +101,14 @@ bot.on(/(дева)/i, (msg) => {
 	return msg.reply.photo(choosePic('full',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
+bot.on(/(коробки)/i, (msg) => {
+	return msg.reply.photo(choosePic('single/korobki',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
+});
+
 bot.on(/(рейдим\sтира|рэйдим\sтира|на\sтира)/i, (msg) => {
 	return bot.sendDocument(
 			msg.chat.id,
-			choosePic('gifs/poke',msg.chat.id,msg.from.username,msg.from.id),
+			choosePic('gifs/poke/tyr.gif',msg.chat.id,msg.from.username,msg.from.id),
 			{replyToMessage: msg.message_id}
 	)
 });
