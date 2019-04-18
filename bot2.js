@@ -82,10 +82,10 @@ return msg.reply.text('пидарасы!',{ asReply: true });
 bot.on('newChatMembers', (msg) =>
 	{
 	if (msg.new_chat_member.username) {
-										msg.reply.text('@'+msg.new_chat_member.username+' привет!',{ asReply: true });
+										msg.reply.text('@'+msg.new_chat_member.username+' туда ли ты зашёл?',{ asReply: true });
 									}
 	else {
-			msg.reply.text(msg.new_chat_member.first_name+' привет!',{ asReply: true });
+			msg.reply.text(msg.new_chat_member.first_name+', туда ли ты зашёл?!',{ asReply: true });
 		}
 	}
 );
@@ -93,10 +93,10 @@ bot.on('newChatMembers', (msg) =>
 bot.on('leftChatMember', (msg) =>
 {
 if (msg.left_chat_member.username) {
-									msg.reply.text('Прощай @'+msg.left_chat_member.username,{ asReply: true });
+									msg.reply.text('Милорд, у нас побег! @'+msg.left_chat_member.username+' слился!',{ asReply: true });
 								}
 else {
-		msg.reply.text('Прощай '+msg.left_chat_member.first_name,{ asReply: true });
+		msg.reply.text('Милорд, у нас побег! '+msg.left_chat_member.first_name+' слился!',{ asReply: true });
 	}
 }
 );
