@@ -119,12 +119,20 @@ bot.on(/(сиси|сиськи|тити)/i, (msg) => {
 	return msg.reply.photo(choosePic('siski',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
-bot.on(/(дева)/i, (msg) => {
+bot.on(/(дева\s)/i, (msg) => {
 	return msg.reply.photo(choosePic('full',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
 bot.on(/(коробки)/i, (msg) => {
 	return msg.reply.photo(choosePic('single/korobki.jpg',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
+});
+
+bot.on(/(сколько\sрейдов|наркоман)/i, (msg) => {
+	return bot.sendDocument(
+			msg.chat.id,
+			choosePic('single/nrkmn.mp4',msg.chat.id,msg.from.username,msg.from.id),
+			{replyToMessage: msg.message_id}
+	)
 });
 
 bot.on(/(рейдим\sтира|рэйдим\sтира|на\sтира)/i, (msg) => {
