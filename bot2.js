@@ -101,6 +101,9 @@ else {
 }
 );
 
+bot.on('edit', (msg) => {
+	return msg.reply.text('орфографию исправлял?', { asReply: true });
+});
 
 bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
@@ -117,6 +120,14 @@ bot.on(/(попа\s|жопа|задница)/i, (msg) => {
 
 bot.on(/(сиси|сиськи|тити)/i, (msg) => {
 	return msg.reply.photo(choosePic('siski',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
+});
+
+bot.on(/(пизда)/i, (msg) => {
+	return msg.reply.photo(choosePic('piski',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
+});
+
+bot.on(/(мальчика)/i, (msg) => {
+	return msg.reply.photo(choosePic('guys',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
 bot.on(/(дева\s)/i, (msg) => {
