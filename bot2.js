@@ -101,9 +101,9 @@ else {
 }
 );
 
-bot.on('edit', (msg) => {
-	return msg.reply.text('орфографию исправлял?', { asReply: true });
-});
+// bot.on('edit', (msg) => {
+//	return msg.reply.text('орфографию исправлял?', { asReply: true });
+// });
 
 bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
