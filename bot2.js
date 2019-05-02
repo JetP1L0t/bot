@@ -3,6 +3,7 @@
 const TeleBot = require('telebot');
 var dateFormat = require('dateformat');
 var newSet = require('./config.js');
+var randomstring = require('./randomstring.js');
 
 const where = './pics/';
 bot = new TeleBot(newSet);
@@ -47,9 +48,13 @@ function choosePic(what, chat_id, requester_name, requester_id) {
 	};
 }
 
+bot.on(/(xaxaxa)/, (msg) => {
+	let say = new randomstring('./strings1.txt');
+	msg.reply.text(say.processFile());
+})
 
 bot.on(/(update)/, (msg) => {
-	if (msg.chat.id=29884911) {
+	if (msg.from.id=29884911) {
 	const execSync = require('child_process').execSync;
 	var cmd1 = execSync('git pull',
         (error, stdout, stderr) => {
@@ -62,7 +67,7 @@ bot.on(/(update)/, (msg) => {
 
 
 bot.on(/(restart)/, (msg) => {
-	if (msg.chat.id=29884911) {
+	if (msg.from.id=29884911) {
 	const execSync = require('child_process').execSync;
 	var cmd2 = execSync('forever restart bot2.js --no-colors',
 		(error, stdout, stderr) => {
@@ -82,7 +87,7 @@ return msg.reply.text('пидарасы!',{ asReply: true });
 bot.on('newChatMembers', (msg) =>
 	{
 	if (msg.new_chat_member.username) {
-										msg.reply.text('@'+msg.new_chat_member.username+' туда ли ты зашёл?',{ asReply: true });
+										msg.reply.text('@'+msg.new_chat_member.username+' туда ли ты зашёл?',{ asReply: false });
 									}
 	else {
 			msg.reply.text(msg.new_chat_member.first_name+', туда ли ты зашёл?!',{ asReply: true });
@@ -108,6 +113,10 @@ else {
 bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
+
+var data = 
+{"key":"word1","val":"blah-blah"}
+{"key":"word2","val":"other-blah-blah"};
 
 
 bot.on(/(арбайт|работать)/i, (msg) => {

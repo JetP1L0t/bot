@@ -1,5 +1,5 @@
 fs = require('fs')
-var param;
+
 var Random = function(path) {
     this.path = path
     this.content = null
@@ -26,8 +26,8 @@ var Random = function(path) {
     }
 }
 
-module.exports = new Random(param);
+//const random = new Random()
+module.exports = Random;
 
-//let stuff = new Random('./strings1.txt')
-//console.log(stuff('./strings1.txt'))
+//let stuff = new Random('./strings1.txt') // file with few random strings
 //console.log('from slave: '+stuff.processFile())
