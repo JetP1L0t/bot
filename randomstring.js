@@ -1,16 +1,33 @@
 fs = require('fs')
-var data;
-fs.readFile('filename.txt', 'utf8', function (err,rawData) {
-if (err) {
-return console.log(err);
-}
-data = rawData.split('\n');
-});
+var param;
+var Random = function(path) {
+    this.path = path
+    this.content = null
+ 
+    this.readFile = function(cb) {
+        try {
+                let data = fs.readFileSync(this.path, 'utf8')
+                this.content = data.split('\n')
+            } catch(err) {
+            throw err
+        }
+    }
+ 
+    this.randomInt = function(low, high) {
+        return Math.floor(Math.random() * (high - low) + low)
+    }
 
-function randomInt (low, high) {
-return Math.floor(Math.random() * (high - low) + low);
+
+    this.processFile = function() {
+        if (this.content == null) {
+            this.readFile()
+        }
+        return this.content[this.randomInt(0, this.content.length)]
+    }
 }
 
-function getRandomLine(){
-return data[randomInt(0,data.length)];
-}
+module.exports = new Random(param);
+
+//let stuff = new Random('./strings1.txt')
+//console.log(stuff('./strings1.txt'))
+//console.log('from slave: '+stuff.processFile())

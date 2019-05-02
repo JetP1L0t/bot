@@ -130,7 +130,7 @@ bot.on(/(мальчика)/i, (msg) => {
 	return msg.reply.photo(choosePic('guys',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
-bot.on(/(девачку\s)/i, (msg) => {
+bot.on(/(девачку)/i, (msg) => {
 	return msg.reply.photo(choosePic('full',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
