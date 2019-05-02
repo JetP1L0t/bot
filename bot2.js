@@ -114,11 +114,6 @@ bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
 
-var data = 
-{"key":"word1","val":"blah-blah"}
-{"key":"word2","val":"other-blah-blah"};
-
-
 bot.on(/(арбайт|работать)/i, (msg) => {
 	return msg.reply.photo(choosePic('arbeit',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
