@@ -159,11 +159,7 @@ bot.on(/(рейдим\sтира|рэйдим\sтира|на\sтира)/i, (msg) 
 });
 
 bot.on(/(стродать)/i, (msg) => {
-	return bot.sendDocument(
-			msg.chat.id,
-			choosePic('single/strodat.mp4',msg.chat.id,msg.from.username,msg.from.id),
-			{replyToMessage: msg.message_id}
-	)
+	return msg.reply.photo(choosePic('strodat',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
 bot.start();
