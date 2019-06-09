@@ -87,10 +87,12 @@ return msg.reply.text('пидарасы!',{ asReply: true });
 bot.on('newChatMembers', (msg) =>
 	{
 	if (msg.new_chat_member.username) {
-										msg.reply.text('@'+msg.new_chat_member.username+' туда ли ты зашёл?',{ asReply: false });
+										let say = new randomstring('./hello.txt');
+										//msg.reply.text(say.processFile());
+										msg.reply.text('@'+msg.new_chat_member.username+' '+say.processFile(),{ asReply: false });
 									}
 	else {
-			msg.reply.text(msg.new_chat_member.first_name+', туда ли ты зашёл?!',{ asReply: true });
+			msg.reply.text(msg.new_chat_member.first_name+', '+say.processFile(),{ asReply: true });
 		}
 	}
 );
