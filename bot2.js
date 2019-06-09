@@ -88,10 +88,10 @@ bot.on('newChatMembers', (msg) =>
 	{
 	if (msg.new_chat_member.username) {
 										let say = new randomstring('./hello.txt');
-										//msg.reply.text(say.processFile());
 										msg.reply.text('@'+msg.new_chat_member.username+' '+say.processFile(),{ asReply: false });
 									}
 	else {
+			let say = new randomstring('./hello.txt');
 			msg.reply.text(msg.new_chat_member.first_name+', '+say.processFile(),{ asReply: true });
 		}
 	}
