@@ -79,6 +79,16 @@ bot.on(/(restart)/, (msg) => {
 } else { return '';}});
 
 
+
+bot.on(/(!to)/, (msg) => {
+	if (msg.from.id=29884911) {
+		let whereToSend = msg.text.split(';').slice(1,2).join(' ');
+		let whatToSend = msg.text.split(';').slice(2).join(' ');
+	return bot.sendMessage(whereToSend,whatToSend);
+//	return bot.sendMessage(29884911,'where->'+whereToSend+' what->'+whatToSend);
+} else { return '';}});
+
+
 bot.on(/(ниа)/i, (msg) => {
 return msg.reply.text('пидарасы!',{ asReply: true });
 });
