@@ -125,7 +125,7 @@ bot.on(/^(exact\soption\?|another_option|да\sили\sнет\?)/, (msg) => {
 	return msg.reply.photo(choosePic('yesno',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
 
-bot.on(/(арбайт|работать)/i, (msg) => {
+bot.on(/(арбайт)/i, (msg) => {
 	return msg.reply.photo(choosePic('arbeit',msg.chat.id,msg.from.username,msg.from.id), { asReply: true });
 });
 
@@ -137,7 +137,7 @@ bot.on(/(сиси|сиськи|тити)/i, (msg) => {
 	return msg.reply.photo(choosePic('siski',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
-bot.on(/(пизда)/i, (msg) => {
+bot.on(/(пизду)/i, (msg) => {
 	return msg.reply.photo(choosePic('piski',msg.chat.id,msg.from.username,msg.from.id),{ asReply: true });
 });
 
