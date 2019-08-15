@@ -79,7 +79,6 @@ bot.on(/(restart)/, (msg) => {
 } else { return '';}});
 
 
-
 bot.on(/(!to)/, (msg) => {
 	if (msg.from.id=29884911) {
 		let whereToSend = msg.text.split(';').slice(1,2).join(' ');
