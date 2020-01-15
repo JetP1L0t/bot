@@ -17,9 +17,11 @@ dbUsers.loadDatabase();
 dbChats.loadDatabase();
 
 function ifUserExists(checkUserId){
-dbUsers.find({}, function (err, docs) {
+dbUsers.find({userId:checkUserId}, function (err, docs) {
     docs.forEach(element => {
-        if (checkUserId.includes(element.trigger)) { return print('true');}
+console.log(element);
+        //        if (checkUserId.includes(element.trigger)) { return console.log('true');}
+//        else {return console.log('false')}
     });
 });
 }
@@ -48,7 +50,8 @@ bot.on('text', (msg) => {
         dbMedia.find({}, function (err, docs) {
           docs.forEach(element => {
             if (msg.text.includes(element.trigger)) { //if no .mp4 then ok, else send doc
-              insertUser(msg.from.id, msg.from.first_name, msg.from.last_name, msg.from.username);
+              console.log(ifUserExists(msg.from.id));
+               //insertUser(msg.from.id, msg.from.first_name, msg.from.last_name, msg.from.username);
                // return msg.reply.text(msg.chat.id + msg.from.username + ifUserExists(msg.from.id));
             }
           });
