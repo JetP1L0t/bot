@@ -16,14 +16,29 @@ dbMedia.loadDatabase();
 dbUsers.loadDatabase();
 dbChats.loadDatabase();
 
-function ifUserExists(checkUserId){
-dbUsers.find({userId:checkUserId}, function (err, docs) {
-    docs.forEach(element => {
-console.log(element);
-        //        if (checkUserId.includes(element.trigger)) { return console.log('true');}
-//        else {return console.log('false')}
+function ifUserExists(checkUserId) {
+
+    dbUsers.find({userId:checkUserId}, function (err, docs) {
+    console.log('TOTAL: '+docs.length);
+
+    if (docs.length==0) {
+        console.log('NEW USER! ID: '+checkUserId);
+        // call insertUser
+        return false;
+    }
+    
+    if (docs.length=1) {
+        console.log('ONE USER! ID: '+checkUserId);
+        return 1;
+    } 
+    
+    if (docs.length>1) {
+        console.log('DUPES! OF ID: '+checkUserId+' IN AMOUNT OF '+docs.length);
+        docs.forEach(element => { console.log(element); });
+        return docs.length;
+    }
+
     });
-});
 }
 
 function insertUser(userId,firstName,lastName,userName){
@@ -50,7 +65,7 @@ bot.on('text', (msg) => {
         dbMedia.find({}, function (err, docs) {
           docs.forEach(element => {
             if (msg.text.includes(element.trigger)) { //if no .mp4 then ok, else send doc
-              console.log(ifUserExists(msg.from.id));
+              console.log('EXISTS? '+msg.from.id+'<- uid (yes/no)-> '+ifUserExists(msg.from.id));
                //insertUser(msg.from.id, msg.from.first_name, msg.from.last_name, msg.from.username);
                // return msg.reply.text(msg.chat.id + msg.from.username + ifUserExists(msg.from.id));
             }
